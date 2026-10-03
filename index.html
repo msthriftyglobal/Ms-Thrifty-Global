@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MS Thrifty Global - Universal C2C Thrift Marketplace</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+</head>
+<body class="bg-slate-950 text-slate-100 font-sans antialiased min-h-screen">
+
+  <!-- TOP HEADER & CURRENCY SWITCHER -->
+  <header class="sticky top-0 z-50 bg-slate-900/90 backdrop-blur-md border-b border-amber-500/20 px-4 py-3">
+    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-4">
+      <div class="flex items-center space-x-3">
+        <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-amber-500 to-amber-200 text-slate-950 font-bold flex items-center justify-center text-xl shadow-lg shadow-amber-500/20">
+          MS
+        </div>
+        <div>
+          <h1 class="text-lg font-bold bg-gradient-to-r from-amber-400 via-amber-200 to-yellow-500 bg-clip-text text-transparent">
+            MS THRIFTY GLOBAL
+          </h1>
+          <p class="text-xs text-slate-400">Global C2C Thrift Marketplace</p>
+        </div>
+      </div>
+
+      <!-- Controls: Currency + Sell Item + Cart -->
+      <div class="flex items-center space-x-3">
+        <!-- Currency Selector -->
+        <div class="relative">
+          <select id="currencySelector" onchange="changeCurrency(this.value)" class="bg-slate-800 border border-amber-500/30 text-amber-300 text-xs rounded-lg px-3 py-2 font-semibold focus:outline-none focus:ring-1 focus:ring-amber-400">
+            <option value="USD">🇺🇸 USD ($)</option>
+            <option value="EUR">🇪🇺 EUR (€)</option>
+            <option value="AED">🇦🇪 AED (AED)</option>
+            <option value="JPY">🇯🇵 JPY (¥)</option>
+            <option value="PKR">🇵🇰 PKR (Rs)</option>
+          </select>
+        </div>
+
+        <!-- Sell Your Item Button -->
+        <button onclick="openSellModal()" class="bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-slate-950 font-bold text-xs px-4 py-2 rounded-lg transition-all flex items-center shadow-lg shadow-amber-500/20">
+          <i class="fa-solid fa-plus-circle mr-1.5 text-sm"></i> Sell Item
+        </button>
+
+        <!-- Cart Button -->
+        <button onclick="toggleCart()" class="relative p-2 bg-slate-800 text-amber-400 rounded-lg border border-amber-500/20 hover:bg-slate-700">
+          <i class="fa-solid fa-bag-shopping"></i>
+          <span id="cartCount" class="absolute -top-1 -right-1 bg-amber-500 text-slate-950 font-bold text-[10px] w-4 h-4 rounded-full flex items-center justify-center">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO SECTION -->
+  <section class="relative bg-gradient-to-b from-slate-900 to-slate-950 py-10 px-4 border-b border-slate-800 text-center">
+    <div class="max-w-4xl mx-auto">
+      <span class="inline-block px-3 py-1 bg-amber-500/10 border border-amber-500/30 text-amber-400 text-xs font-semibold rounded-full mb-3">
+        🌍 Buy & Sell Pre-Loved Fashion Worldwide
+      </span>
+      <h2 class="text-3xl sm:text-5xl font-extrabold text-white mb-3 tracking-tight">
+        Turn Your Closet Into Cash. <br/>
+        <span class="text-amber-400">Shop Premium Global Thrift.</span>
+      </h2>
+      <p class="text-slate-400 text-sm max-w-2xl mx-auto mb-6">
+        Verified global sellers from USA, Europe, UAE, Japan & Pakistan listing top-tier pre-owned sneakers, jackets, and luxury fashion.
+      </p>
+      
+      <!-- Supported Payment Badges -->
+      <div class="flex flex-wrap items-center justify-center gap-3 text-xs text-slate-400">
+        <span class="px-2.5 py-1 bg-slate-800/80 rounded border border-slate-700"><i class="fa-brands fa-cc-stripe text-amber-400 mr-1"></i> Stripe Global Cards</span>
+        <span class="px-2.5 py-1 bg-slate-800/80 rounded border border-slate-700"><i class="fa-brands fa-paypal text-sky-400 mr-1"></i> PayPal International</span>
+        <span class="px-2.5 py-1 bg-slate-800/80 rounded border border-slate-700"><i class="fa-solid fa-wallet text-emerald-400 mr-1"></i> Regional Gateways</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRODUCT CATALOG & FILTERS -->
+  <main class="max-w-7xl mx-auto px-4 py-8">
+    <div class="flex flex-col md:flex-row gap-6">
+      <!-- Sidebar Filters -->
+      <aside class="w-full md:w-64 bg-slate-900 p-4 rounded-xl border border-slate-800 h-fit">
+        <h3 class="text-sm font-bold text-amber-400 mb-4 uppercase tracking-wider flex items-center justify-between">
+          <span>Filters</span>
+          <i class="fa-solid fa-filter text-xs"></i>
+        </h3>
+        
+        <!-- Category Filter -->
+        <div class="mb-5">
+          <label class="block text-xs font-semibold text-slate-300 mb-2">Category</label>
+          <div class="space-y-1.5 text-xs text-slate-400">
+            <label class="flex items-center space-x-2 cursor-pointer hover:text-white">
+              <input type="radio" name="cat" value="all" checked class="accent-amber-500" onchange="filterProducts()"/>
+              <span>All Categories</span>
+            </label>
+            <label class="flex items-center space-x-2 cursor-pointer hover:text-white">
+              <input type="radio" name="cat" value="shoes" class="accent-amber-500" onchange="filterProducts()"/>
+              <span>Sneakers & Shoes</span>
+            </label>
+            <label class="flex items-center space-x-2 cursor-pointer hover:text-white">
+              <input type="radio" name="cat" value="jackets" class="accent-amber-500" onchange="filterProducts()"/>
+              <span>Jackets & Coats</span>
+            </label>
+            <label class="flex items-center space-x-2 cursor-pointer hover:text-white">
+              <input type="radio" name="cat" value="pants" class="accent-amber-500" onchange="filterProducts()"/>
+              <span>Pants & Shirts</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Condition Filter -->
+        <div class="mb-5">
+          <label class="block text-xs font-semibold text-slate-300 mb-2">Item Condition</label>
+          <div class="space-y-1.5 text-xs text-slate-400">
+            <label class="flex items-center space-x-2 cursor-pointer hover:text-white">
+              <input type="checkbox" value="10/10" class="accent-amber-500" onchange="filterProducts()"/>
+              <span>10/10 Mint Condition</span>
+            </label>
+            <label class="flex items-center space-x-2 cursor-pointer hover:text-white">
+              <input type="checkbox" value="9/10" class="accent-amber-500" onchange="filterProducts()"/>
+              <span>9/10 Like New</span>
+            </label>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Products Grid -->
+      <section class="flex-1">
+        <div class="flex justify-between items-center mb-6">
+          <h2 class="text-xl font-bold text-white">Global Listings</h2>
+          <span id="itemCounter" class="text-xs text-slate-400">Showing all items</span>
+        </div>
+
+        <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          <!-- Rendered dynamically by JavaScript -->
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- SELL YOUR ITEM MODAL (C2C SELLER SYSTEM) -->
+  <div id="sellModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden items-center justify-center p-4">
+    <div class="bg-slate-900 border border-amber-500/30 rounded-2xl w-full max-w-lg p-6 relative max-h-[90vh] overflow-y-auto">
+      <button onclick="closeSellModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white">
+        <i class="fa-solid fa-xmark text-lg"></i>
+      </button>
+
+      <h3 class="text-xl font-bold text-amber-400 mb-1">List Your Thrift Item</h3>
+      <p class="text-xs text-slate-400 mb-5">Sell pre-loved sneakers, shoes, or clothing globally.</p>
+
+      <form id="sellForm" onsubmit="handleItemListing(event)" class="space-y-4 text-xs">
+        <div>
+          <label class="block text-slate-300 mb-1">Product Title</label>
+          <input type="text" required id="sellTitle" placeholder="e.g. Nike Air Jordan 1 Retro Thrift" class="w-full bg-slate-800 border border-slate-700 rounded-lg p-2.5 text-white focus:border-amber-400 focus:outline-none"/>
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-slate-300 mb-1">Category</label>
+            <select id="sellCat" class="w-full bg-slate-800 border border-slate-700 rounded-lg p-2.5 text-white focus:border-amber-400 focus:outline-none">
+              <option value="shoes">Sneakers & Shoes</option>
+              <option value="jackets">Jackets & Coats</option>
+              <option value="pants">Pants & Shirts</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-slate-300 mb-1">Condition</label>
+            <select id="sellCondition" class="w-full bg-slate-800 border border-slate-700 rounded-lg p-2.5 text-white focus:border-amber-400 focus:outline-none">
+              <option value="10/10 Mint">10/10 Mint</option>
+              <option value="9/10 Like New">9/10 Like New</option>
+              <option value="8/10 Good">8/10 Good</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-slate-300 mb-1">Price (USD)</label>
+            <input type="number" step="0.01" required id="sellPrice" placeholder="45.00" class="w-full bg-slate-800 border border-slate-700 rounded-lg p-2.5 text-white focus:border-amber-400 focus:outline-none"/>
+          </div>
+          <div>
+            <label class="block text-slate-300 mb-1">Size</label>
+            <input type="text" required id="sellSize" placeholder="e.g. US 10 / EU 44 / L" class="w-full bg-slate-800 border border-slate-700 rounded-lg p-2.5 text-white focus:border-amber-400 focus:outline-none"/>
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-slate-300 mb-1">Seller Location / Country</label>
+          <input type="text" required id="sellLocation" placeholder="e.g. California, USA or Tokyo, Japan" class="w-full bg-slate-800 border border-slate-700 rounded-lg p-2.5 text-white focus:border-amber-400 focus:outline-none"/>
+        </div>
+
+        <div>
+          <label class="block text-slate-300 mb-1">Product Image URL</label>
+          <input type="url" required id="sellImg" placeholder="https://images.unsplash.com/photo-..." class="w-full bg-slate-800 border border-slate-700 rounded-lg p-2.5 text-white focus:border-amber-400 focus:outline-none"/>
+        </div>
+
+        <button type="submit" class="w-full py-3 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-slate-950 font-bold rounded-lg text-sm shadow-lg shadow-amber-500/20 transition-all">
+          Publish Listing Globally
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- JAVASCRIPT LOGIC -->
+  <script>
+    // Rates & Multi-Currency Data
+    const rates = { USD: 1, EUR: 0.92, AED: 3.67, JPY: 152.5, PKR: 278.5 };
+    const symbols = { USD: '$', EUR: '€', AED: 'AED ', JPY: '¥', PKR: 'Rs ' };
+    let currentCurrency = 'USD';
+
+    // Mock Thrift Database
+    let products = [
+      { id: 1, title: "Nike Dunk Low Retro Thrift", cat: "shoes", condition: "9/10 Like New", priceUSD: 65, size: "US 9.5", seller: "Alex (USA)", img: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500" },
+      { id: 2, title: "Vintage Leather Biker Jacket", cat: "jackets", condition: "10/10 Mint", priceUSD: 110, size: "Large", seller: "Kenji (Japan)", img: "https://images.unsplash.com/photo-1551028719-00167b16eac5?w=500" },
+      { id: 3, title: "Adidas Originals Superstar", cat: "shoes", condition: "8/10 Good", priceUSD: 40, size: "US 10", seller: "Zain (Pakistan)", img: "https://images.unsplash.com/photo-1584735935682-2f2b69dff9d2?w=500" }
+    ];
+
+    let cart = [];
+
+    function renderProducts() {
+      const grid = document.getElementById('productGrid');
+      grid.innerHTML = products.map(p => {
+        const convertedPrice = (p.priceUSD * rates[currentCurrency]).toFixed(currentCurrency === 'JPY' ? 0 : 2);
+        return `
+          <div class="bg-slate-900 border border-slate-800 rounded-xl overflow-hidden hover:border-amber-500/40 transition-all flex flex-col">
+            <div class="relative h-48 bg-slate-800 overflow-hidden">
+              <img src="${p.img}" alt="${p.title}" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300"/>
+              <span class="absolute top-2 left-2 bg-slate-950/80 text-amber-400 text-[10px] font-bold px-2 py-0.5 rounded border border-amber-500/30">
+                ${p.condition}
+              </span>
+              <span class="absolute bottom-2 right-2 bg-slate-900/90 text-slate-300 text-[10px] px-2 py-0.5 rounded">
+                📍 ${p.seller}
+              </span>
+            </div>
+            <div class="p-4 flex-1 flex flex-col justify-between">
+              <div>
+                <h4 class="font-bold text-sm text-white mb-1 line-clamp-1">${p.title}</h4>
+                <p class="text-xs text-slate-400 mb-3">Size: <span class="text-slate-200 font-medium">${p.size}</span></p>
+              </div>
+              <div class="flex items-center justify-between pt-2 border-t border-slate-800">
+                <span class="text-base font-extrabold text-amber-400">
+                  ${symbols[currentCurrency]}${convertedPrice}
+                </span>
+                <button onclick="addToCart(${p.id})" class="px-3 py-1.5 bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold text-xs rounded-lg transition-colors">
+                  Add to Cart
+                </button>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function changeCurrency(val) {
+      currentCurrency = val;
+      renderProducts();
+    }
+
+    function openSellModal() { document.getElementById('sellModal').classList.remove('hidden'); document.getElementById('sellModal').classList.add('flex'); }
+    function closeSellModal() { document.getElementById('sellModal').classList.add('hidden'); document.getElementById('sellModal').classList.remove('flex'); }
+
+    function handleItemListing(e) {
+      e.preventDefault();
+      const newProduct = {
+        id: Date.now(),
+        title: document.getElementById('sellTitle').value,
+        cat: document.getElementById('sellCat').value,
+        condition: document.getElementById('sellCondition').value,
+        priceUSD: parseFloat(document.getElementById('sellPrice').value),
+        size: document.getElementById('sellSize').value,
+        seller: document.getElementById('sellLocation').value,
+        img: document.getElementById('sellImg').value
+      };
+      products.unshift(newProduct);
+      renderProducts();
+      closeSellModal();
+      alert('Your item has been listed globally!');
+    }
+
+    function addToCart(id) {
+      const item = products.find(p => p.id === id);
+      cart.push(item);
+      document.getElementById('cartCount').innerText = cart.length;
+      alert(`Added "${item.title}" to cart!`);
+    }
+
+    // Initial Render
+    renderProducts();
+  </script>
+</body>
+</html>
