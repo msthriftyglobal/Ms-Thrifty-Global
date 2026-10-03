@@ -3,664 +3,318 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NeXa — Global Enterprise Marketplace & Wholesale Exchange</title>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <title>NeXa - Next-Gen Global Trading Network</title>
+    <!-- FontAwesome Vector Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --bg-main: #060911;
-            --bg-card: rgba(18, 24, 38, 0.7);
-            --border-glow: rgba(255, 107, 0, 0.25);
-            --accent: #ff6b00;
-            --accent-hover: #ff852e;
-            --accent-gradient: linear-gradient(135deg, #ff6b00 0%, #ff3b00 100%);
-            --text-white: #f8fafc;
-            --text-muted: #94a3b8;
-            --glass-bg: rgba(15, 23, 42, 0.85);
-            --glass-border: rgba(255, 255, 255, 0.08);
+            --primary-orange: #FF6600;
+            --dark-bg: #0F172A;
+            --card-bg: #1E293B;
+            --nav-bg: #111827;
+            --text-light: #F8FAFC;
+            --text-muted: #94A3B8;
         }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; }
-        body { background-color: var(--bg-main); color: var(--text-white); overflow-x: hidden; line-height: 1.5; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
 
-        /* Announcement Bar */
-        .announcement-bar {
-            background: linear-gradient(90deg, #0b0f19, #1e1108, #0b0f19);
-            border-bottom: 1px solid var(--glass-border);
-            color: var(--text-muted);
+        body {
+            background-color: var(--dark-bg);
+            color: var(--text-light);
+        }
+
+        /* Top Announcement Bar */
+        .top-bar {
+            background-color: #050B14;
+            padding: 8px 5%;
+            display: flex;
+            justify-content: space-between;
             font-size: 12px;
-            padding: 6px 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            color: var(--text-muted);
+            border-bottom: 1px solid #1E293B;
         }
-        .announcement-bar a { color: var(--accent); text-decoration: none; font-weight: 600; }
 
-        /* Header Navigation */
+        .top-bar span {
+            color: #10B981;
+        }
+
+        /* Main Header Navigation */
         header {
-            background: var(--glass-bg);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--glass-border);
-            padding: 14px 5%;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-
-        .header-wrapper {
+            background-color: var(--nav-bg);
+            padding: 15px 5%;
             display: flex;
+            align-items: center;
             justify-content: space-between;
-            align-items: center;
             gap: 20px;
+            border-bottom: 1px solid #1E293B;
         }
 
-        .nexa-brand {
-            display: flex;
-            align-items: center;
-            text-decoration: none;
-            font-family: 'Space Grotesk', sans-serif;
+        /* Custom NeXa Logo with Cross Exchange Icon */
+        .logo {
             font-size: 28px;
-            font-weight: 700;
-            color: #ffffff;
-            letter-spacing: -0.5px;
-        }
-        .x-exchange-badge {
-            background: var(--accent-gradient);
-            color: #ffffff;
-            padding: 2px 10px;
-            border-radius: 8px;
-            margin: 0 3px;
             font-weight: 800;
-            box-shadow: 0 0 20px rgba(255, 107, 0, 0.5);
-            transform: skewX(-12deg);
-            display: inline-block;
-        }
-
-        /* Search Engine */
-        .search-engine {
+            color: #FFFFFF;
             display: flex;
             align-items: center;
-            background: rgba(255, 255, 255, 0.04);
-            border: 1px solid var(--glass-border);
-            border-radius: 12px;
-            padding: 4px;
-            flex: 1;
-            max-width: 680px;
-            transition: all 0.3s ease;
-        }
-        .search-engine:focus-within {
-            border-color: var(--accent);
-            box-shadow: 0 0 25px rgba(255, 107, 0, 0.2);
-            background: rgba(255, 255, 255, 0.07);
+            letter-spacing: 1px;
+            text-decoration: none;
         }
 
-        .global-country-select {
-            background: transparent;
-            border: none;
-            color: var(--text-white);
-            font-size: 13px;
-            font-weight: 600;
-            padding: 10px 14px;
-            outline: none;
-            cursor: pointer;
-            border-right: 1px solid var(--glass-border);
-        }
-        .global-country-select option { background: #0f172a; color: #ffffff; }
-
-        .search-input-field {
-            flex: 1;
-            position: relative;
-            display: flex;
-            align-items: center;
-        }
-        .search-input-field input {
-            width: 100%;
-            background: transparent;
-            border: none;
-            color: #ffffff;
-            padding: 10px 35px 10px 15px;
-            font-size: 14px;
-            outline: none;
-        }
-        .clear-search-trigger {
-            position: absolute;
-            right: 10px;
-            background: rgba(255, 255, 255, 0.1);
-            border: none;
-            color: #ffffff;
-            width: 20px; height: 20px;
-            border-radius: 50%;
-            cursor: pointer;
-            display: none;
+        .logo-x {
+            color: var(--primary-orange);
+            margin: 0 2px;
+            display: inline-flex;
             align-items: center;
             justify-content: center;
-            font-size: 11px;
+            transform: rotate(45deg);
         }
 
-        .btn-search-action {
-            background: var(--accent-gradient);
-            border: none;
-            color: white;
-            padding: 10px 24px;
+        .logo-x i {
+            font-size: 24px;
+        }
+
+        /* Search Box Bar */
+        .search-container {
+            display: flex;
+            flex: 1;
+            max-width: 650px;
+            background: #1E293B;
             border-radius: 8px;
-            font-weight: 700;
-            font-size: 13px;
-            cursor: pointer;
-            transition: 0.3s;
+            overflow: hidden;
+            border: 1px solid #334155;
         }
 
-        .action-group { display: flex; align-items: center; gap: 14px; }
-        
-        .action-btn-secondary {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid var(--glass-border);
-            color: var(--text-white);
-            padding: 9px 16px;
-            border-radius: 10px;
-            font-size: 13px;
-            font-weight: 600;
+        .country-select {
+            background: #334155;
+            color: var(--text-light);
+            border: none;
+            padding: 10px 15px;
+            outline: none;
             cursor: pointer;
-            transition: 0.3s;
         }
 
-        .btn-auth-primary {
-            background: var(--accent-gradient);
+        .search-input {
+            width: 100%;
+            padding: 10px 15px;
+            border: none;
+            background: transparent;
+            color: var(--text-light);
+            outline: none;
+        }
+
+        .search-btn {
+            background: var(--primary-orange);
             color: white;
             border: none;
-            padding: 10px 22px;
-            border-radius: 10px;
-            font-weight: 700;
-            font-size: 13px;
+            padding: 10px 25px;
             cursor: pointer;
-            box-shadow: 0 4px 20px rgba(255, 107, 0, 0.3);
+            font-weight: 600;
+            transition: 0.3s;
         }
 
-        /* Category Navigation Bar */
-        .category-navigation {
+        .search-btn:hover {
+            background: #e55c00;
+        }
+
+        /* User Action Controls */
+        .header-actions {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .btn-action {
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 12px;
+            border-radius: 6px;
+            background: #1E293B;
+            transition: 0.3s;
+        }
+
+        .btn-action:hover {
+            background: #334155;
+        }
+
+        .btn-auth {
+            background: var(--primary-orange);
+            color: white;
+            font-weight: 600;
+        }
+
+        /* Categories Bar */
+        .categories-bar {
+            background: #0B0F19;
+            padding: 10px 5%;
             display: flex;
             gap: 12px;
-            padding: 14px 5%;
-            background: rgba(6, 9, 17, 0.95);
-            border-bottom: 1px solid var(--glass-border);
             overflow-x: auto;
-            white-space: nowrap;
-        }
-        .category-navigation::-webkit-scrollbar { display: none; }
-        .nav-chip {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid var(--glass-border);
-            color: var(--text-muted);
-            padding: 10px 22px;
-            border-radius: 30px;
-            font-size: 13px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        .nav-chip:hover, .nav-chip.active {
-            background: var(--accent);
-            color: #ffffff;
-            border-color: var(--accent);
-            box-shadow: 0 0 20px rgba(255, 107, 0, 0.4);
+            border-bottom: 1px solid #1E293B;
         }
 
-        /* Hero Banner */
-        .hero-viewport {
-            height: 400px;
+        .cat-item {
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 13px;
+            padding: 8px 16px;
+            background: #1E293B;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            white-space: nowrap;
+            transition: 0.3s;
+        }
+
+        .cat-item.active, .cat-item:hover {
+            background: var(--primary-orange);
+            color: white;
+        }
+
+        /* Hero Banner with Dynamic High-Quality Slider */
+        .hero {
             position: relative;
-            overflow: hidden;
+            height: 480px;
             display: flex;
             align-items: center;
             justify-content: center;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             background-size: cover;
             background-position: center;
-            transition: background 0.5s ease-in-out;
+            transition: background-image 1s ease-in-out;
+            filter: brightness(0.35);
+            z-index: 1;
         }
-        .hero-backdrop-gradient {
-            position: absolute;
-            width: 100%; height: 100%;
-            background: linear-gradient(180deg, rgba(6, 9, 17, 0.4) 0%, rgba(6, 9, 17, 0.95) 100%);
-        }
-        .hero-caption-box {
+
+        .hero-content {
             position: relative;
             z-index: 2;
-            text-align: center;
-            max-width: 850px;
+            max-width: 800px;
             padding: 0 20px;
         }
-        .hero-caption-box h1 {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 46px;
-            font-weight: 700;
-            margin-bottom: 16px;
-            background: linear-gradient(180deg, #ffffff 0%, #cbd5e1 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+
+        .hero-content h1 {
+            font-size: 42px;
+            font-weight: 800;
+            margin-bottom: 15px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.7);
         }
-        .hero-caption-box p { font-size: 16px; color: var(--text-muted); margin-bottom: 25px; }
 
-        /* Main Content Layout */
-        .main-content-layout { width: 90%; max-width: 1250px; margin: 40px auto; }
-
-        .section-headline {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 26px;
-            font-weight: 700;
+        .hero-content p {
+            font-size: 18px;
+            color: var(--text-muted);
             margin-bottom: 25px;
         }
 
-        /* Marketplace Product Grid */
-        .product-marketplace-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-            gap: 25px;
-        }
-        .marketplace-card {
-            background: var(--bg-card);
-            border: 1px solid var(--glass-border);
-            border-radius: 18px;
-            padding: 16px;
-            transition: all 0.3s ease;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-        .marketplace-card:hover {
-            transform: translateY(-8px);
-            border-color: var(--border-glow);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
-        }
-        .card-media {
-            width: 100%; height: 210px;
-            border-radius: 12px;
-            overflow: hidden;
-            position: relative;
-            background: #0f172a;
-        }
-        .card-media img { width: 100%; height: 100%; object-fit: cover; }
-        .card-badge {
-            position: absolute;
-            top: 10px; left: 10px;
-            background: rgba(6, 9, 17, 0.85);
-            border: 1px solid var(--glass-border);
-            color: var(--accent);
-            font-size: 10px;
-            font-weight: 700;
-            padding: 4px 10px;
-            border-radius: 20px;
-            text-transform: uppercase;
-        }
-        .card-title { font-size: 15px; font-weight: 700; margin: 14px 0 6px; color: var(--text-white); }
-        .card-footer-row { display: flex; justify-content: space-between; align-items: center; margin-top: 15px; }
-        .item-price { font-size: 18px; font-weight: 800; color: #ffffff; }
-
-        /* About NeXa Application Description Box */
-        .about-nexa-card {
-            background: rgba(15, 23, 42, 0.7);
-            border: 1px solid var(--glass-border);
-            border-radius: 20px;
-            padding: 35px;
-            margin: 50px 0;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-        }
-        .about-col h3 { font-size: 20px; font-weight: 700; color: #ffffff; margin-bottom: 12px; }
-        .about-col p { font-size: 13.5px; color: var(--text-muted); line-height: 1.7; }
-
-        /* Automated Live Customer Support Chat Widget */
-        .support-chat-trigger {
-            position: fixed;
-            bottom: 25px; right: 25px;
-            background: var(--accent-gradient);
+        .hero-btn {
+            background: var(--primary-orange);
             color: white;
-            border: none;
-            padding: 14px 22px;
-            border-radius: 50px;
-            font-weight: 700;
-            font-size: 14px;
-            cursor: pointer;
-            box-shadow: 0 10px 30px rgba(255, 107, 0, 0.4);
-            z-index: 1500;
-            display: flex;
-            align-items: center;
-            gap: 10px;
+            padding: 12px 30px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 16px;
+            display: inline-block;
             transition: 0.3s;
         }
-        .support-chat-trigger:hover { transform: scale(1.05); }
 
-        .support-chat-box {
-            display: none;
-            position: fixed;
-            bottom: 90px; right: 25px;
-            width: 350px; height: 450px;
-            background: #0f172a;
-            border: 1px solid var(--glass-border);
-            border-radius: 20px;
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.6);
-            z-index: 1500;
-            flex-direction: column;
-            overflow: hidden;
+        .hero-btn:hover {
+            background: #e55c00;
+            transform: translateY(-2px);
         }
-        .chat-header {
-            background: var(--glass-bg);
-            padding: 15px;
-            border-bottom: 1px solid var(--glass-border);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-weight: 700;
-        }
-        .chat-body {
-            flex: 1;
-            padding: 15px;
-            overflow-y: auto;
-            font-size: 13px;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-        .msg-bot {
-            background: rgba(255, 107, 0, 0.15);
-            border: 1px solid rgba(255, 107, 0, 0.3);
-            padding: 10px 14px;
-            border-radius: 12px;
-            color: var(--text-white);
-            max-width: 85%;
-        }
-        .msg-quick-btn {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid var(--glass-border);
-            color: var(--accent);
-            padding: 8px 12px;
-            border-radius: 8px;
-            font-size: 12px;
-            cursor: pointer;
-            text-align: left;
-            transition: 0.2s;
-        }
-        .msg-quick-btn:hover { background: rgba(255, 107, 0, 0.2); }
-
-        /* Footer */
-        footer {
-            background: #04060c;
-            border-top: 1px solid var(--glass-border);
-            padding: 60px 5% 30px;
-            color: var(--text-muted);
-            font-size: 13px;
-        }
-        .footer-columns {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 40px;
-            margin-bottom: 40px;
-        }
-        .footer-col h4 { color: white; font-size: 15px; margin-bottom: 16px; font-weight: 700; }
-        .footer-col ul { list-style: none; }
-        .footer-col ul li { margin-bottom: 10px; }
-        .footer-col ul li a { color: var(--text-muted); text-decoration: none; transition: 0.2s; }
-        .footer-col ul li a:hover { color: var(--accent); }
     </style>
 </head>
 <body>
 
-    <!-- Top Bar -->
-    <div class="announcement-bar">
-        <span>🌐 Global Trade Escrow Protection Active — Verified Enterprise Network</span>
-        <span>24/7 Customer Help Desk Active</span>
+    <!-- Top Announcement Bar -->
+    <div class="top-bar">
+        <div><span>●</span> Global Trade Escrow Protection Active — Verified Enterprise Network</div>
+        <div><i class="fa-solid fa-headset"></i> 24/7 Customer Help Desk Active</div>
     </div>
 
-    <!-- Header -->
+    <!-- Main Navigation Bar -->
     <header>
-        <div class="header-wrapper">
-            <a href="#" class="nexa-brand">
-                Ne<span class="x-exchange-badge">X</span>a
-            </a>
+        <a href="#" class="logo">
+            Ne<span class="logo-x"><i class="fa-solid fa-arrows-rotate"></i></span>a
+        </a>
 
-            <!-- Search Engine -->
-            <div class="search-engine">
-                <select class="global-country-select">
-                    <option value="all">🌐 All Countries (Global)</option>
-                    <option value="us">🇺🇸 United States</option>
-                    <option value="pk">🇵🇰 Pakistan</option>
-                    <option value="ae">🇦🇪 United Arab Emirates</option>
-                    <option value="gb">🇬🇧 United Kingdom</option>
-                    <option value="sa">🇸🇦 Saudi Arabia</option>
-                </select>
+        <div class="search-container">
+            <select class="country-select">
+                <option>All Countries (Global)</option>
+                <option>USA</option>
+                <option>UAE</option>
+                <option>UK</option>
+            </select>
+            <input type="text" class="search-input" placeholder="Search Electronics, Wholesale Stocks, Digital Goods...">
+            <button class="search-btn"><i class="fa-solid fa-magnifying-glass"></i> Search</button>
+        </div>
 
-                <div class="search-input-field">
-                    <input type="text" id="searchInput" placeholder="Search Electronics, Wholesale Stocks, Digital Assets..." oninput="checkInput()">
-                    <button class="clear-search-trigger" id="clearBtn" onclick="clearSearchInput()">✕</button>
-                </div>
-
-                <button class="btn-search-action">Search</button>
-            </div>
-
-            <div class="action-group">
-                <button class="action-btn-secondary" onclick="alert('Order Tracking System Ready')">📦 Orders</button>
-                <button class="action-btn-secondary">🛒 Cart (<span id="cartCount">0</span>)</button>
-                <button class="btn-auth-primary" onclick="alert('Sign In Portal Ready')">Sign In / Sign Up</button>
-            </div>
+        <div class="header-actions">
+            <a href="#" class="btn-action"><i class="fa-solid fa-box-archive"></i> Orders</a>
+            <a href="#" class="btn-action"><i class="fa-solid fa-cart-shopping"></i> Cart (0)</a>
+            <a href="#" class="btn-action btn-auth"><i class="fa-solid fa-user"></i> Sign In / Sign Up</a>
         </div>
     </header>
 
-    <!-- Categories -->
-    <div class="category-navigation">
-        <span class="nav-chip active" onclick="switchCategory('all', this)">🌐 All Marketplace</span>
-        <span class="nav-chip" onclick="switchCategory('tv', this)">📺 Smart TVs & Displays</span>
-        <span class="nav-chip" onclick="switchCategory('gaming', this)">🎮 Gaming Gear & Consoles</span>
-        <span class="nav-chip" onclick="switchCategory('beauty', this)">💄 Beauty & Cosmetics</span>
-        <span class="nav-chip" onclick="switchCategory('outdoor', this)">⛺ Outdoor & Adventure</span>
+    <!-- Categories Navigation Bar -->
+    <div class="categories-bar">
+        <a href="#" class="cat-item active"><i class="fa-solid fa-store"></i> All Marketplace</a>
+        <a href="#" class="cat-item"><i class="fa-solid fa-tv"></i> Smart TVs & Displays</a>
+        <a href="#" class="cat-item"><i class="fa-solid fa-gamepad"></i> Gaming Gear & Consoles</a>
+        <a href="#" class="cat-item"><i class="fa-solid fa-spray-can-sparkles"></i> Beauty & Cosmetics</a>
+        <a href="#" class="cat-item"><i class="fa-solid fa-compass"></i> Outdoor & Adventure</a>
     </div>
 
-    <!-- Hero Banner -->
-    <section class="hero-viewport" id="heroViewport" style="background-image: url('https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1600&q=80');">
-        <div class="hero-backdrop-gradient"></div>
-        <div class="hero-caption-box">
-            <h1 id="heroTitle">Next-Gen Global Trading Network</h1>
-            <p id="heroSubtitle">Connect with verified sellers, wholesale distributors, and P2P traders across 100+ countries.</p>
+    <!-- Hero Section Slider -->
+    <section class="hero">
+        <div class="hero-bg" id="heroBg"></div>
+        <div class="hero-content">
+            <h1>Next-Gen Global Trading Network</h1>
+            <p>Connect with verified sellers, wholesale distributors, and P2P traders across 100+ countries.</p>
+            <a href="#" class="hero-btn"><i class="fa-solid fa-rocket"></i> Explore Marketplace</a>
         </div>
     </section>
 
-    <!-- Main Content -->
-    <div class="main-content-layout">
-        <div class="section-headline" id="categorySectionHeading">Featured Enterprise Listings</div>
-
-        <div class="product-marketplace-grid" id="productGrid">
-            <!-- Dynamically Rendered Products -->
-        </div>
-
-        <!-- About Application & Purpose Description Box -->
-        <div class="about-nexa-card">
-            <div class="about-col">
-                <h3>What is NeXa?</h3>
-                <p>NeXa is a global decentralized trade marketplace designed to connect buyers, factory-direct suppliers, and digital merchants across 100+ countries. Our platform guarantees escrow-protected payments and verified transactions.</p>
-            </div>
-            <div class="about-col">
-                <h3>NeXa Seller Engine</h3>
-                <p>Build your career and global trade footprint. Verified sellers get instant access to wholesale logistics, automated escrow clearing, and AI-driven buyer routing.</p>
-            </div>
-            <div class="about-col">
-                <h3>NeXa Buyer Shield</h3>
-                <p>Every transaction on NeXa is protected by multi-signature smart escrow. If products do not match specifications, automated refunds are issued instantly.</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- Automated Customer Help & Support Chat Floating Widget -->
-    <button class="support-chat-trigger" onclick="toggleSupportChat()">
-        💬 NeXa Support Desk
-    </button>
-
-    <div class="support-chat-box" id="supportChatBox">
-        <div class="chat-header">
-            <span>🤖 NeXa Automated Assistant</span>
-            <span style="cursor: pointer;" onclick="toggleSupportChat()">✕</span>
-        </div>
-        <div class="chat-body" id="chatBody">
-            <div class="msg-bot">Hello! Welcome to NeXa Customer Help Center. How can we assist you today?</div>
-            <button class="msg-quick-btn" onclick="sendAutoReply('Where is my order?')">📦 Track My Order</button>
-            <button class="msg-quick-btn" onclick="sendAutoReply('How to become a NeXa Seller?')">🏪 Become a NeXa Seller</button>
-            <button class="msg-quick-btn" onclick="sendAutoReply('How Escrow protection works?')">🛡️ Buyer Escrow Protection</button>
-            <button class="msg-quick-btn" onclick="sendAutoReply('Talk to Live Agent')">🎧 Connect with Support Agent</button>
-        </div>
-    </div>
-
-    <!-- Footer -->
-    <footer>
-        <div class="footer-columns">
-            <div class="footer-col">
-                <h4>NeXa Application</h4>
-                <p style="margin-bottom: 12px;">Next-generation global trading exchange powering enterprise buyers, sellers, and wholesale distributors.</p>
-                <p><a href="#" style="color: var(--accent); font-weight: 700;">About NeXa Platform & Purpose</a></p>
-            </div>
-            <div class="footer-col">
-                <h4>NeXa Ecosystem</h4>
-                <ul>
-                    <li><a href="#">NeXa Seller Hub</a></li>
-                    <li><a href="#">NeXa Buyer Protection</a></li>
-                    <li><a href="#">NeXa Careers & Future</a></li>
-                    <li><a href="#">Wholesale Supplier Network</a></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h4>Customer Help & Support</h4>
-                <ul>
-                    <li><a href="#" onclick="toggleSupportChat(); return false;">24/7 Automated Help Center</a></li>
-                    <li><a href="#">Escrow & Refund Disputes</a></li>
-                    <li><a href="#">Seller Verification (KYC)</a></li>
-                    <li><a href="#">Contact Support Desk</a></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h4>Legal & Rules</h4>
-                <ul>
-                    <li><a href="#">Privacy Policy</a></li>
-                    <li><a href="#">Terms of Service</a></li>
-                    <li><a href="#">Security Guidelines</a></li>
-                </ul>
-            </div>
-        </div>
-
-        <div style="text-align: center; border-top: 1px solid var(--glass-border); padding-top: 20px;">
-            <p>&copy; 2026 NeXa Inc. All Global Rights Reserved.</p>
-        </div>
-    </footer>
-
-    <!-- Interactive Script -->
+    <!-- JavaScript For Automatic HD Background Image Slider -->
     <script>
-        const categoryDatabase = {
-            all: {
-                banner: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1600&q=80",
-                title: "Next-Gen Global Trading Network",
-                subtitle: "Connect with verified sellers, wholesale distributors, and P2P traders across 100+ countries.",
-                heading: "Featured Enterprise Listings",
-                products: [
-                    { name: "Samsung 55\" 4K Ultra HD Smart TV", price: "$899.00", badge: "Verified Store", image: "https://images.unsplash.com/photo-1593784991095-a205069470b6?auto=format&fit=crop&w=600&q=80" },
-                    { name: "PS5 Digital Bundle & Controllers", price: "$549.00", badge: "Wholesale Bulk", image: "https://images.unsplash.com/photo-1606813907291-d86efa9b94db?auto=format&fit=crop&w=600&q=80" },
-                    { name: "Luxury Makeup & Beauty Palette Kit", price: "$120.00", badge: "Official Brand", image: "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=600&q=80" },
-                    { name: "Waterproof Outdoor Camping Tent", price: "$185.00", badge: "Verified Seller", image: "https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?auto=format&fit=crop&w=600&q=80" }
-                ]
-            },
-            tv: {
-                banner: "https://images.unsplash.com/photo-1593784991095-a205069470b6?auto=format&fit=crop&w=1600&q=80",
-                title: "Ultra HD Cinema & Smart Displays",
-                subtitle: "Discover 4K, OLED, and QD-LED Smart Displays directly from verified manufacturers.",
-                heading: "Smart TVs & Home Cinema Displays",
-                products: [
-                    { name: "Samsung 55\" 4K Ultra HD Smart TV", price: "$899.00", badge: "Verified Store", image: "https://images.unsplash.com/photo-1593784991095-a205069470b6?auto=format&fit=crop&w=600&q=80" }
-                ]
-            },
-            gaming: {
-                banner: "https://images.unsplash.com/photo-1538481199705-c710c4e965fc?auto=format&fit=crop&w=1600&q=80",
-                title: "Next-Gen Gaming Consoles & Hardware",
-                subtitle: "Equip your setup with high-performance consoles, controllers, and VR rigs.",
-                heading: "Gaming Equipment & Consoles",
-                products: [
-                    { name: "PS5 Digital Bundle & Controllers", price: "$549.00", badge: "Wholesale Bulk", image: "https://images.unsplash.com/photo-1606813907291-d86efa9b94db?auto=format&fit=crop&w=600&q=80" }
-                ]
-            },
-            beauty: {
-                banner: "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=1600&q=80",
-                title: "Premium Skincare & Luxury Cosmetics",
-                subtitle: "Authentic, dermatologist-approved beauty products and luxury cosmetic kits.",
-                heading: "Luxury Beauty & Skincare",
-                products: [
-                    { name: "Luxury Makeup & Beauty Palette Kit", price: "$120.00", badge: "Official Brand", image: "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=600&q=80" }
-                ]
-            },
-            outdoor: {
-                banner: "https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?auto=format&fit=crop&w=1600&q=80",
-                title: "Rugged Camping & Outdoor Gear",
-                subtitle: "High-grade tents, backpacks, and adventure gear for extreme weather.",
-                heading: "Outdoor & Adventure Gear",
-                products: [
-                    { name: "Waterproof Outdoor Camping Tent", price: "$185.00", badge: "Verified Seller", image: "https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?auto=format&fit=crop&w=600&q=80" }
-                ]
-            }
-        };
+        const heroImages = [
+            'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=1920&q=80', // Global Cargo & Warehouse
+            'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=1920&q=80', // Modern Tech & Trade
+            'https://images.unsplash.com/photo-1553413077-190dd305871c?auto=format&fit=crop&w=1920&q=80'  // Logistics & Logistics Hub
+        ];
 
-        function switchCategory(key, element) {
-            const chips = document.querySelectorAll('.nav-chip');
-            chips.forEach(chip => chip.classList.remove('active'));
-            element.classList.add('active');
+        let currentIndex = 0;
+        const heroBg = document.getElementById('heroBg');
 
-            const data = categoryDatabase[key] || categoryDatabase.all;
-
-            document.getElementById('heroViewport').style.backgroundImage = `url('${data.banner}')`;
-            document.getElementById('heroTitle').innerText = data.title;
-            document.getElementById('heroSubtitle').innerText = data.subtitle;
-            document.getElementById('categorySectionHeading').innerText = data.heading;
-
-            const grid = document.getElementById('productGrid');
-            grid.innerHTML = '';
-            data.products.forEach(item => {
-                grid.innerHTML += `
-                    <div class="marketplace-card">
-                        <div class="card-media">
-                            <span class="card-badge">${item.badge}</span>
-                            <img src="${item.image}" alt="${item.name}">
-                        </div>
-                        <div class="card-title">${item.name}</div>
-                        <div class="card-footer-row">
-                            <span class="item-price">${item.price}</span>
-                            <button class="btn-search-action" onclick="addToCart()">Add to Cart</button>
-                        </div>
-                    </div>
-                `;
-            });
+        function changeBackgroundImage() {
+            heroBg.style.backgroundImage = `url('${heroImages[currentIndex]}')`;
+            currentIndex = (currentIndex + 1) % heroImages.length;
         }
 
-        window.onload = function() {
-            switchCategory('all', document.querySelector('.nav-chip.active'));
-        };
+        // Initial image set
+        changeBackgroundImage();
 
-        // Customer Support Chat Box Toggle & Automation
-        function toggleSupportChat() {
-            const box = document.getElementById('supportChatBox');
-            box.style.display = box.style.display === 'flex' ? 'none' : 'flex';
-        }
-
-        function sendAutoReply(query) {
-            const chatBody = document.getElementById('chatBody');
-            let response = "Thank you for reaching out. A NeXa representative will connect shortly.";
-
-            if(query.includes('order')) response = "📦 You can track your order status live in the 'Orders' portal on top navigation.";
-            else if(query.includes('Seller')) response = "🏪 To become a NeXa Seller, visit the 'NeXa Seller Hub' link in footer and submit your KYC documents.";
-            else if(query.includes('Escrow')) response = "🛡️ All buyer payments are safely held in multi-sig Escrow until item delivery is verified.";
-            else if(query.includes('Agent')) response = "🎧 Connecting you to NeXa Live Customer Agent... Estimated wait time: 1 min.";
-
-            chatBody.innerHTML += `<div style="text-align:right; font-weight:700; color:var(--accent); margin-top:5px;">${query}</div>`;
-            setTimeout(() => {
-                chatBody.innerHTML += `<div class="msg-bot">${response}</div>`;
-                chatBody.scrollTop = chatBody.scrollHeight;
-            }, 500);
-        }
-
-        let cartCount = 0;
-        function addToCart() {
-            cartCount++;
-            document.getElementById('cartCount').innerText = cartCount;
-        }
+        // Change background image every 5 seconds
+        setInterval(changeBackgroundImage, 5000);
     </script>
+
 </body>
 </html>
