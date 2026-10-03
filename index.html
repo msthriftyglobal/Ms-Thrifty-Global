@@ -1,288 +1,547 @@
 <!DOCTYPE html>
-<html lang="hi">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nexa - Smart Global Marketplace</title>
+    <title>NeXa - Global Buy, Sell & Wholesale Marketplace</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #0f172a;
-            --accent: #f97316;
-            --light: #f8fafc;
+            --primary: #0b0f19;
+            --accent: #ff6b00;
+            --accent-glow: rgba(255, 107, 0, 0.4);
+            --bg: #f8fafc;
+            --text-dark: #0f172a;
         }
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: var(--light);
-            color: #333;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; }
+        body { background-color: var(--bg); color: var(--text-dark); overflow-x: hidden; }
 
-        /* Header & Navigation */
+        /* Header Bar */
         header {
-            background-color: var(--primary);
+            background: rgba(11, 15, 25, 0.98);
+            backdrop-filter: blur(12px);
             color: white;
-            padding: 15px 5%;
+            padding: 14px 4%;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.25);
+        }
+
+        .header-top {
             display: flex;
             justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-
-        .logo-container {
-            display: flex;
             align-items: center;
             gap: 15px;
         }
 
-        /* Logo Option 1: N-Smile */
-        .logo-smile {
-            font-size: 28px;
-            font-weight: bold;
-            letter-spacing: 1px;
-            color: white;
-            position: relative;
-        }
-        .logo-smile span {
-            color: var(--accent);
-            border-bottom: 3px solid var(--accent);
-            border-radius: 50%;
-            padding: 0 4px;
-        }
-
-        /* Logo Option 2: X-Exchange */
-        .logo-exchange {
-            font-size: 28px;
-            font-weight: bold;
-            letter-spacing: 1px;
-            color: white;
-            display: none;
-        }
-        .logo-exchange .x-btn {
-            color: var(--accent);
-            background: rgba(249, 115, 22, 0.2);
-            padding: 0 6px;
-            border-radius: 4px;
-        }
-
-        .toggle-btn {
-            background: #334155;
-            color: #fff;
-            border: 1px solid #475569;
-            padding: 5px 10px;
-            font-size: 12px;
-            border-radius: 4px;
+        /* Amazon-Style Custom SVG Brand Logo */
+        .logo-container {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
             cursor: pointer;
         }
-
-        .search-bar {
-            width: 40%;
-            display: flex;
+        .logo-svg {
+            height: 42px;
+            width: auto;
         }
 
-        .search-bar input {
-            width: 100%;
-            padding: 10px;
+        /* Search + Location Wrapper */
+        .search-wrapper {
+            display: flex;
+            align-items: center;
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.18);
+            border-radius: 30px;
+            padding: 4px 6px;
+            flex: 1;
+            max-width: 650px;
+            transition: 0.3s;
+        }
+        .search-wrapper:focus-within {
+            border-color: var(--accent);
+            box-shadow: 0 0 12px var(--accent-glow);
+            background: rgba(255,255,255,0.12);
+        }
+
+        .location-select {
+            background: transparent;
             border: none;
-            border-radius: 4px 0 0 4px;
+            color: #ffa866;
+            font-weight: 600;
+            padding: 8px 12px;
+            font-size: 13px;
             outline: none;
-        }
-
-        .search-bar button {
-            background: var(--accent);
-            color: white;
-            border: none;
-            padding: 10px 15px;
-            border-radius: 0 4px 4px 0;
             cursor: pointer;
+            border-right: 1px solid rgba(255,255,255,0.2);
         }
+        .location-select option { background: #0b0f19; color: white; }
 
-        .nav-actions button {
-            background: var(--accent);
-            color: white;
-            border: none;
-            padding: 10px 18px;
-            border-radius: 4px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
-        /* Main Section */
-        .hero {
-            background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.8)), url('https://picsum.photos/1200/400');
-            background-size: cover;
-            color: white;
-            text-align: center;
-            padding: 60px 20px;
-        }
-
-        .features-bar {
+        .search-input-box {
             display: flex;
-            justify-content: space-around;
-            background: #e2e8f0;
-            padding: 15px;
-            font-weight: 500;
+            align-items: center;
+            flex: 1;
+            position: relative;
+            padding: 0 10px;
+        }
+        .search-input-box input {
+            width: 100%;
+            background: transparent;
+            border: none;
+            color: white;
+            outline: none;
+            padding: 8px 25px 8px 5px;
+            font-size: 14px;
+        }
+        .clear-btn {
+            position: absolute;
+            right: 8px;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            font-size: 11px;
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            justify-content: center;
         }
 
-        /* Products Grid */
-        .container {
+        .search-btn {
+            background: linear-gradient(135deg, var(--accent), #e05d00);
+            border: none;
+            color: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 14px;
+        }
+
+        .header-actions { display: flex; gap: 12px; align-items: center; }
+
+        .header-btn {
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: white;
+            padding: 8px 14px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 13px;
+        }
+
+        .cart-count {
+            background: var(--accent);
+            color: white;
+            font-size: 11px;
+            padding: 2px 6px;
+            border-radius: 50%;
+        }
+
+        .btn-login {
+            background: linear-gradient(135deg, var(--accent), #e05d00);
+            color: white;
+            border: none;
+            padding: 9px 22px;
+            border-radius: 25px;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 4px 15px var(--accent-glow);
+        }
+
+        /* Category Chips Bar */
+        .category-bar {
+            display: flex;
+            gap: 10px;
+            padding: 10px 4%;
+            background: #0b0f19;
+            overflow-x: auto;
+            white-space: nowrap;
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+        .category-bar::-webkit-scrollbar { display: none; }
+        .chip {
+            background: rgba(255,255,255,0.06);
+            color: #cbd5e1;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .chip:hover, .chip.active {
+            background: var(--accent);
+            color: white;
+            box-shadow: 0 2px 10px var(--accent-glow);
+        }
+
+        /* Hero Banner */
+        .hero {
+            height: 380px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            overflow: hidden;
+        }
+        .hero-slide {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+        .hero-slide.active { opacity: 1; }
+        .hero-overlay {
+            position: absolute;
+            width: 100%; height: 100%;
+            background: linear-gradient(to bottom, rgba(11,15,25,0.5), rgba(11,15,25,0.88));
+        }
+        .hero-content { position: relative; z-index: 2; max-width: 750px; padding: 0 20px; }
+        .hero-content h1 { font-size: 42px; font-weight: 800; margin-bottom: 12px; }
+
+        /* Trust Cards */
+        .trust-bar {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: -25px auto 30px;
+            position: relative;
+            z-index: 10;
             width: 90%;
-            margin: 30px auto;
+            max-width: 1100px;
+        }
+        .trust-card {
+            background: white;
+            padding: 16px 20px;
+            border-radius: 14px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.06);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex: 1;
+        }
+        .trust-icon {
+            width: 42px; height: 42px;
+            background: rgba(255, 107, 0, 0.1);
+            color: var(--accent);
+            border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 20px;
+            font-weight: bold;
         }
 
+        /* Container & Products */
+        .container { width: 90%; max-width: 1200px; margin: 30px auto; }
         .products-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
             gap: 20px;
             margin-top: 20px;
         }
-
         .product-card {
             background: white;
-            border-radius: 8px;
-            padding: 15px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-            text-align: center;
+            border-radius: 14px;
+            padding: 14px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+            transition: 0.3s;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
-
-        .product-card img {
-            width: 100%;
-            height: 150px;
-            object-fit: cover;
-            border-radius: 4px;
-        }
-
-        /* Login Modal Demo */
-        .login-box {
-            background: white;
-            max-width: 400px;
-            margin: 40px auto;
-            padding: 25px;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            text-align: center;
-        }
-
-        .social-btn {
-            width: 100%;
-            padding: 10px;
-            margin: 8px 0;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            background: white;
-            cursor: pointer;
-            font-weight: 500;
-        }
-
-        footer {
+        .product-card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0,0,0,0.08); }
+        .img-wrapper { width: 100%; height: 180px; border-radius: 10px; overflow: hidden; background: #f1f5f9; }
+        .product-card img { width: 100%; height: 100%; object-fit: cover; }
+        .product-title { font-size: 15px; font-weight: 700; margin: 10px 0 5px; color: var(--text-dark); }
+        .product-tag { font-size: 11px; background: #f1f5f9; padding: 2px 8px; border-radius: 4px; color: #64748b; display: inline-block; }
+        .product-bottom { display: flex; justify-content: space-between; align-items: center; margin-top: 12px; }
+        .price { font-size: 18px; font-weight: 800; color: var(--accent); }
+        .add-cart-btn {
             background: var(--primary);
-            color: #94a3b8;
-            text-align: center;
-            padding: 20px;
-            margin-top: 50px;
-            font-size: 14px;
+            color: white;
+            border: none;
+            padding: 7px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 12px;
         }
+
+        /* Disclaimer Card */
+        .disclaimer-card {
+            background: #fff7ed;
+            border: 1px solid #ffedd5;
+            border-left: 5px solid var(--accent);
+            padding: 16px;
+            border-radius: 10px;
+            margin: 25px 0;
+            font-size: 13px;
+            color: #9a3412;
+            line-height: 1.5;
+        }
+
+        /* Login Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(11, 15, 25, 0.8);
+            backdrop-filter: blur(8px);
+            justify-content: center; align-items: center;
+            z-index: 2000;
+        }
+        .modal-content {
+            background: white;
+            width: 90%; max-width: 400px;
+            padding: 30px 25px;
+            border-radius: 20px;
+            text-align: center;
+            position: relative;
+        }
+        .close-btn { position: absolute; top: 15px; right: 20px; font-size: 22px; cursor: pointer; color: #94a3b8; }
+        
+        .social-login-btn {
+            width: 100%;
+            padding: 11px;
+            margin: 8px 0;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            background: white;
+            font-size: 13px;
+            font-weight: 700;
+            color: #334155;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        footer { background: var(--primary); color: #64748b; text-align: center; padding: 25px; margin-top: 60px; font-size: 13px; }
     </style>
 </head>
 <body>
 
-    <!-- Header -->
+    <!-- Header Section -->
     <header>
-        <div class="logo-container">
-            <!-- Logo 1: N-Smile -->
-            <div id="logoSmile" class="logo-smile">
-                <span>N</span>exa
+        <div class="header-top">
+            <!-- Brand Logo with Amazon-like Smile/Exchange Arrow -->
+            <a href="#" class="logo-container">
+                <svg class="logo-svg" viewBox="0 0 160 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <text x="5" y="32" font-family="'Plus Jakarta Sans', sans-serif" font-weight="800" font-size="30" fill="#FFFFFF">NeXa</text>
+                    <path d="M 12 38 Q 42 50 68 38" stroke="#FF6B00" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+                    <path d="M 64 34 L 70 38 L 65 43" fill="#FF6B00" stroke="#FF6B00" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </a>
+
+            <!-- Search + Location Bar -->
+            <div class="search-wrapper">
+                <select class="location-select">
+                    <option value="global">🌐 Global (All)</option>
+                    <option value="us">🇺🇸 USA</option>
+                    <option value="pk">🇵🇰 Pakistan</option>
+                    <option value="ae">🇦🇪 UAE</option>
+                    <option value="uk">🇬🇧 UK</option>
+                </select>
+                <div class="search-input-box">
+                    <input type="text" id="searchInput" placeholder="Search TVs, Movie Assets, Games, Sports, Beauty..." oninput="toggleClearBtn()">
+                    <button class="clear-btn" id="clearBtn" onclick="clearSearch()">✕</button>
+                </div>
+                <button class="search-btn">Search</button>
             </div>
-            
-            <!-- Logo 2: X-Exchange -->
-            <div id="logoExchange" class="logo-exchange">
-                Ne<span class="x-btn">X</span>a
+
+            <div class="header-actions">
+                <button class="header-btn" onclick="alert('Gift Cards Section Opened')">🎁 Gift Cards</button>
+                <button class="header-btn" onclick="alert('Orders & Returns Panel Opened')">📦 Orders / Returns</button>
+                <button class="header-btn">🛒 <span class="cart-count" id="cartNum">0</span></button>
+                <button class="btn-login" onclick="openLogin()">Sign In</button>
             </div>
-
-            <button class="toggle-btn" onclick="toggleLogo()">Switch Logo (N / X)</button>
-        </div>
-
-        <div class="search-bar">
-            <input type="text" placeholder="Search items on Nexa...">
-            <button>🔍</button>
-        </div>
-
-        <div class="nav-actions">
-            <button onclick="document.getElementById('loginSection').scrollIntoView();">Login / Sign-Up</button>
         </div>
     </header>
 
-    <!-- Hero Banner -->
-    <section class="hero">
-        <h1>Welcome to Nexa Marketplace</h1>
-        <p>Buy & Sell Globally with Verified Sellers and Legal Safety</p>
-    </section>
-
-    <!-- Features Bar -->
-    <div class="features-bar">
-        <span>🔒 100% KYC Verified Sellers</span>
-        <span>⚡ Multi-Factor Global Login</span>
-        <span>🌍 Multi-Country Access</span>
+    <!-- Category Search Bar -->
+    <div class="category-bar">
+        <span class="chip active">All Items</span>
+        <span class="chip">🎬 Movie Assets</span>
+        <span class="chip">💿 CDs & DVDs</span>
+        <span class="chip">📺 TVs & Home Tech</span>
+        <span class="chip">💻 Software & Apps</span>
+        <span class="chip">⚽ Sports Gear</span>
+        <span class="chip">⛺ Outdoor Equipment</span>
+        <span class="chip">🎮 Video Games</span>
+        <span class="chip">🧸 Toys & Kids</span>
+        <span class="chip">🍼 Baby Care</span>
+        <span class="chip">💄 Makeup & Beauty</span>
     </div>
 
-    <!-- Main Products Section -->
-    <div class="container">
-        <h2>Trending Items</h2>
-        <div class="products-grid">
-            <div class="product-card">
-                <img src="https://picsum.photos/200?random=1" alt="Item">
-                <h3>Smart Watch</h3>
-                <p style="color: var(--accent); font-weight: bold;">$45.00</p>
+    <!-- Auto Slider Banner -->
+    <section class="hero">
+        <div class="hero-slide active" style="background-image: url('https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1350&q=80');"></div>
+        <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?auto=format&fit=crop&w=1350&q=80');"></div>
+        <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1472851294608-062f824d29cc?auto=format&fit=crop&w=1350&q=80');"></div>
+        
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1>Buy & Sell Everything Globally</h1>
+            <p>From single items to wholesale bulk stock. Verified buyers and sellers worldwide.</p>
+        </div>
+    </section>
+
+    <!-- Trust Badges -->
+    <div class="trust-bar">
+        <div class="trust-card">
+            <div class="trust-icon">🛡️</div>
+            <div>
+                <h4 style="font-size: 14px; font-weight: 800;">100% Verified Sellers</h4>
+                <p style="font-size: 12px; color: #64748b;">KYC & ID Verified</p>
             </div>
-            <div class="product-card">
-                <img src="https://picsum.photos/200?random=2" alt="Item">
-                <h3>Wireless Headphones</h3>
-                <p style="color: var(--accent); font-weight: bold;"> $80.00</p>
+        </div>
+        <div class="trust-card">
+            <div class="trust-icon">🔒</div>
+            <div>
+                <h4 style="font-size: 14px; font-weight: 800;">Safe Multi-Login</h4>
+                <p style="font-size: 12px; color: #64748b;">Google, Apple, TikTok OTP</p>
             </div>
-            <div class="product-card">
-                <img src="https://picsum.photos/200?random=3" alt="Item">
-                <h3>Leather Jacket</h3>
-                <p style="color: var(--accent); font-weight: bold;">$120.00</p>
+        </div>
+        <div class="trust-card">
+            <div class="trust-icon">🏬</div>
+            <div>
+                <h4 style="font-size: 14px; font-weight: 800;">Wholesale & Retail</h4>
+                <p style="font-size: 12px; color: #64748b;">Bulk Shipping Supported</p>
             </div>
         </div>
     </div>
 
-    <!-- Login Options Preview Section -->
-    <div id="loginSection" class="login-box">
-        <h3>Login to Nexa</h3>
-        <p style="font-size: 12px; color: #666;">Choose your preferred login method</p>
+    <!-- Main Content Container -->
+    <div class="container">
         
-        <button class="social-btn">🌐 Continue with Google</button>
-        <button class="social-btn">🍎 Continue with Apple ID</button>
-        <button class="social-btn">📘 Continue with Facebook</button>
-        <button class="social-btn">🎵 Continue with TikTok</button>
-        <button class="social-btn">📱 Continue with Phone Number (OTP)</button>
+        <!-- P2P Direct Deal Disclaimer -->
+        <div class="disclaimer-card">
+            <b>⚠️ Important Notice on Direct Deals & Returns:</b>
+            If you are purchasing directly from an individual seller (P2P), please verify all details before making payment. Direct customer-to-customer trades <b>do not qualify for standard returns</b> unless purchased from verified shops/wholesalers.
+        </div>
 
-        <p style="font-size: 11px; color: #888; margin-top: 15px;">
-            By logging in, you agree to Nexa's <b>Terms of Service</b> and <b>Privacy Policy</b>. Direct dealing outside the platform is at your own risk.
-        </p>
+        <!-- Featured Products Grid -->
+        <h2 style="font-size: 22px; font-weight: 800;">🔥 Featured Listings</h2>
+
+        <div class="products-grid">
+            <div class="product-card">
+                <div class="img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?auto=format&fit=crop&w=600&q=80" alt="TV">
+                </div>
+                <div class="product-title">Samsung 55" 4K Smart TV</div>
+                <span class="product-tag">TVs & Electronics</span>
+                <div class="product-bottom">
+                    <span class="price">$420.00</span>
+                    <button class="add-cart-btn" onclick="addToCart()">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1538481199705-c710c4e965fc?auto=format&fit=crop&w=600&q=80" alt="Gaming Setup">
+                </div>
+                <div class="product-title">PS5 Digital Bundle & Games</div>
+                <span class="product-tag">Video Games</span>
+                <div class="product-bottom">
+                    <span class="price">$499.00</span>
+                    <button class="add-cart-btn" onclick="addToCart()">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=600&q=80" alt="Beauty Care">
+                </div>
+                <div class="product-title">Luxury Makeup & Beauty Kit</div>
+                <span class="product-tag">Makeup & Beauty</span>
+                <div class="product-bottom">
+                    <span class="price">$65.00</span>
+                    <button class="add-cart-btn" onclick="addToCart()">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=600&q=80" alt="Outdoor Gear">
+                </div>
+                <div class="product-title">Waterproof Outdoor Camping Tent</div>
+                <span class="product-tag">Outdoor Equipment</span>
+                <div class="product-bottom">
+                    <span class="price">$110.00</span>
+                    <button class="add-cart-btn" onclick="addToCart()">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Login Modal -->
+    <div class="modal" id="loginModal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeLogin()">&times;</span>
+            <div style="font-size: 22px; font-weight: 800; margin-bottom: 5px;">Sign in to NeXa</div>
+            <p style="font-size: 12px; color: #64748b; margin-bottom: 20px;">Access your orders, gift cards, and global listings</p>
+
+            <button class="social-login-btn">🌐 Continue with Google</button>
+            <button class="social-login-btn">🍎 Continue with Apple ID</button>
+            <button class="social-login-btn">📘 Continue with Facebook</button>
+            <button class="social-login-btn">🎵 Continue with TikTok</button>
+            <button class="social-login-btn" style="background: #f1f5f9;">📱 Phone Number + OTP</button>
+
+            <p style="font-size: 11px; color: #94a3b8; margin-top: 15px; line-height: 1.4;">
+                By logging in, you accept NeXa's <b>Terms of Service</b> and <b>Privacy Policy</b>.
+            </p>
+        </div>
     </div>
 
     <!-- Footer -->
     <footer>
-        <p>&copy; 2026 Nexa Inc. All Rights Reserved. | KYC Verified Direct-Trading Platform</p>
+        <p>&copy; 2026 NeXa Inc. | Global Buy, Sell & Wholesale Marketplace</p>
     </footer>
 
-    <!-- JavaScript for Logo Toggle -->
+    <!-- Interactive Scripts -->
     <script>
-        function toggleLogo() {
-            var smile = document.getElementById('logoSmile');
-            var exchange = document.getElementById('logoExchange');
+        // Auto Hero Slider Logic
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.hero-slide');
+        setInterval(() => {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + 1) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }, 4000);
 
-            if (smile.style.display === "none") {
-                smile.style.display = "block";
-                exchange.style.display = "none";
-            } else {
-                smile.style.display = "none";
-                exchange.style.display = "block";
-            }
+        // Search Input Clear Button
+        function toggleClearBtn() {
+            const input = document.getElementById('searchInput');
+            const clearBtn = document.getElementById('clearBtn');
+            clearBtn.style.display = input.value.length > 0 ? 'flex' : 'none';
         }
+        function clearSearch() {
+            const input = document.getElementById('searchInput');
+            input.value = '';
+            toggleClearBtn();
+            input.focus();
+        }
+
+        // Cart Counter
+        let count = 0;
+        function addToCart() {
+            count++;
+            document.getElementById('cartNum').innerText = count;
+        }
+
+        // Login Modal Logic
+        function openLogin() { document.getElementById('loginModal').style.display = 'flex'; }
+        function closeLogin() { document.getElementById('loginModal').style.display = 'none'; }
     </script>
 </body>
 </html>
